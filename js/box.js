@@ -3,47 +3,60 @@ document.addEventListener("DOMContentLoaded",
 
         var h=Number((getComputedStyle(document.getElementById("playground")).height).replace("px",""));
         var w=Number((getComputedStyle(document.getElementById("playground")).width).replace("px",""));
-        var bl=1
+        var bl=-1
 
         function block(){
         	bl=bl*(-1);
         	console.log(bl);
+            if(bl==1){
+                document.getElementById("block").style.background="green";
+            }else{
+                document.getElementById("block").style.background="gray";
+            }
         }
+ 
+        function isCentersMatch(deltaX, deltaY){
+            marginLeftOfBox=Number((getComputedStyle(document.getElementById("box")).marginLeft).replace("px",""));
+            marginLeftOfCrab=Number((getComputedStyle(document.getElementById("crab")).marginLeft).replace("px",""));
+            marginTopOfBox=Number((getComputedStyle(document.getElementById("box")).marginTop).replace("px",""));
+            marginTopOfCrab=Number((getComputedStyle(document.getElementById("crab")).marginTop).replace("px",""));
+            deltaMarginLeft=marginLeftOfCrab-marginLeftOfBox-deltaX;
+            deltaMarginTop=marginTopOfCrab-marginTopOfBox-deltaY;
+            console.log(deltaMarginLeft==12.5, deltaMarginTop==12.5)
+            if((deltaMarginLeft==12.5)&&(deltaMarginTop==12.5)){
+                return true;
+                }else{
+                    return false;
+                }
+            }
+
+
 
         function right(){
-        	var marginLeftOfBox=Number((getComputedStyle(document.getElementById("box")).marginLeft).replace("px",""));
-            var marginLeftOfCrab=Number((getComputedStyle(document.getElementById("crab")).marginLeft).replace("px",""));
-            var deltaMarginLeft=marginLeftOfCrab-marginLeftOfBox-50;
-            console.log("deltaMarginLeft: "+deltaMarginLeft)
-        	if ((bl>0)&&(marginLeftOfBox+50<w)&&(deltaMarginLeft==12.5)){
+            centersMatch = isCentersMatch(50,0);
+        	if ((bl>0)&&(marginLeftOfBox+50<w)&&centersMatch){
         		document.getElementById("box").style.marginLeft=marginLeftOfBox+50+"px";
         	}
         }
 
         function left(){
-            var marginLeftOfBox=Number((getComputedStyle(document.getElementById("box")).marginLeft).replace("px",""));
-            var marginLeftOfCrab=Number((getComputedStyle(document.getElementById("crab")).marginLeft).replace("px",""));
-            var deltaMarginLeft=marginLeftOfCrab-marginLeftOfBox+50;
-            console.log("deltaMarginLeft: "+deltaMarginLeft);
-        	if((bl>0)&&(marginLeftOfBox>40)&&deltaMarginLeft==12.5){
+            centersMatch = isCentersMatch(-50,0);
+        	if((bl>0)&&(marginLeftOfBox>40)&&centersMatch){
         		document.getElementById("box").style.marginLeft=marginLeftOfBox-50+"px";
         	}
         }
 
         function down(){
-        	var marginTopOfBox=Number((getComputedStyle(document.getElementById("box")).marginTop).replace("px",""));
-            var marginTopOfCrab=Number((getComputedStyle(document.getElementById("crab")).marginTop).replace("px",""));
-            var deltaMarginTop=marginTopOfCrab-marginTopOfBox-50;
-        	if ((bl>0)&&(marginTopOfBox+50<h)&&(deltaMarginTop==12.5)){
+            centersMatch = isCentersMatch(0,50);
+        	if ((bl>0)&&(marginTopOfBox+50<h)&&centersMatch){
         		document.getElementById("box").style.marginTop=marginTopOfBox+50+"px";
+                
         	}
         }
 
         function up(){
-            var marginTopOfBox=Number((getComputedStyle(document.getElementById("box")).marginTop).replace("px",""));
-            var marginTopOfCrab=Number((getComputedStyle(document.getElementById("crab")).marginTop).replace("px",""));
-            var deltaMarginTop=marginTopOfCrab-marginTopOfBox+50;
-            if((bl>0)&&(marginTopOfBox>40)&&(deltaMarginTop==12.5)){
+            centersMatch = isCentersMatch(0,-50);
+            if((bl>0)&&(marginTopOfBox>40)&&(centersMatch)){
             	document.getElementById("box").style.marginTop=marginTopOfBox-50+"px";
             }
         }

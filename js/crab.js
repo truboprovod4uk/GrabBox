@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded",
         	var marginLeftOfCrab=Number((getComputedStyle(document.getElementById("crab")).marginLeft).replace("px",""));
         	if ((marginLeftOfCrab + 50)<w){
         		document.getElementById("crab").style.marginLeft=marginLeftOfCrab+50+"px";
-        		console.log("left: " + Number(marginLeftOfCrab + 50));
         	}
         }
 
@@ -17,7 +16,6 @@ document.addEventListener("DOMContentLoaded",
             var marginLeftOfCrab=Number((getComputedStyle(document.getElementById("crab")).marginLeft).replace("px",""));
         	if(marginLeftOfCrab>50){
         		document.getElementById("crab").style.marginLeft=marginLeftOfCrab-50+"px";
-        		console.log("left: " + Number(marginLeftOfCrab - 50));
         	}
         }
 
@@ -25,7 +23,6 @@ document.addEventListener("DOMContentLoaded",
         	var marginTopOfCrab=Number((getComputedStyle(document.getElementById("crab")).marginTop).replace("px",""));
         	if ((marginTopOfCrab+50)<h){
         		document.getElementById("crab").style.marginTop=marginTopOfCrab+50+"px";
-        		console.log("top: " + Number(marginTopOfCrab + 50));
         	}
         }
 
@@ -33,7 +30,6 @@ document.addEventListener("DOMContentLoaded",
             var marginTopOfCrab=Number((getComputedStyle(document.getElementById("crab")).marginTop).replace("px",""));
             if(marginTopOfCrab>50){
             	document.getElementById("crab").style.marginTop=marginTopOfCrab-50+"px";
-        	    console.log("top: " + Number(marginTopOfCrab - 50));
             }
         }
 
