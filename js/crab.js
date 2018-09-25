@@ -1,35 +1,42 @@
 document.addEventListener("DOMContentLoaded",
     function(event){
 
+        var delta = 50;
         var h=Number((getComputedStyle(document.getElementById("playground")).height).replace("px",""));
         var w=Number((getComputedStyle(document.getElementById("playground")).width).replace("px",""));
 
+        function crabPos(){
+            var crab = new Object()
+            crab.marginLeftOfCrab=Number((getComputedStyle(document.getElementById("crab")).marginLeft).replace("px",""));
+            crab.marginTopOfCrab=Number((getComputedStyle(document.getElementById("crab")).marginTop).replace("px",""));
+            return crab;
+        }
 
         function right(){
-        	var marginLeftOfCrab=Number((getComputedStyle(document.getElementById("crab")).marginLeft).replace("px",""));
-        	if ((marginLeftOfCrab + 50)<w){
-        		document.getElementById("crab").style.marginLeft=marginLeftOfCrab+50+"px";
+        	var c = crabPos();
+        	if ((c.marginLeftOfCrab+delta)<w){
+        		document.getElementById("crab").style.marginLeft=c.marginLeftOfCrab+delta+"px";
         	}
         }
 
         function left(){
-            var marginLeftOfCrab=Number((getComputedStyle(document.getElementById("crab")).marginLeft).replace("px",""));
-        	if(marginLeftOfCrab>50){
-        		document.getElementById("crab").style.marginLeft=marginLeftOfCrab-50+"px";
+            var c = crabPos();
+        	if(c.marginLeftOfCrab>delta){
+        		document.getElementById("crab").style.marginLeft=c.marginLeftOfCrab-delta+"px";
         	}
         }
 
         function down(){
-        	var marginTopOfCrab=Number((getComputedStyle(document.getElementById("crab")).marginTop).replace("px",""));
-        	if ((marginTopOfCrab+50)<h){
-        		document.getElementById("crab").style.marginTop=marginTopOfCrab+50+"px";
+        	var c = crabPos();
+        	if ((c.marginTopOfCrab+delta)<h){
+        		document.getElementById("crab").style.marginTop=c.marginTopOfCrab+delta+"px";
         	}
         }
 
         function up(){
-            var marginTopOfCrab=Number((getComputedStyle(document.getElementById("crab")).marginTop).replace("px",""));
-            if(marginTopOfCrab>50){
-            	document.getElementById("crab").style.marginTop=marginTopOfCrab-50+"px";
+            var c = crabPos();
+            if(c.marginTopOfCrab>delta){
+            	document.getElementById("crab").style.marginTop=c.marginTopOfCrab-delta+"px";
             }
         }
 
