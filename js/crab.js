@@ -33,11 +33,42 @@ document.addEventListener("DOMContentLoaded",
             }
         }
 
+        function runX(){
+            var marginLeftOfCrab=Number((getComputedStyle(document.getElementById("crab")).marginLeft).replace("px",""));
+            var marginLeftOfBox=Number((getComputedStyle(document.getElementById("box")).marginLeft).replace("px",""));
+            var deltaMarginLeft=(marginLeftOfCrab-marginLeftOfBox-12.5)/50;
+            if (deltaMarginLeft<0){
+                var timerId=setInterval(right,1000);
+                setTimeout(function(){clearInterval(timerId)}, Math.abs(1000*deltaMarginLeft));
+            }else if(deltaMarginLeft>0){
+                var timerId=setInterval(left,1000);
+                setTimeout(function(){clearInterval(timerId)}, Math.abs(1000*deltaMarginLeft));
+            }
+
+        }
+        function runY(){
+            var marginTopOfBox=Number((getComputedStyle(document.getElementById("box")).marginTop).replace("px",""));
+            var marginTopOfCrab=Number((getComputedStyle(document.getElementById("crab")).marginTop).replace("px",""));
+            var deltaMarginTop=(marginTopOfCrab-marginTopOfBox-12.5)/50;
+            if (deltaMarginTop<0){
+                var timerId=setInterval(down,1000);
+                setTimeout(function(){clearInterval(timerId)}, Math.abs(1000*deltaMarginTop));
+            }else if(deltaMarginTop>0){
+                var timerId=setInterval(up,1000);
+                setTimeout(function(){clearInterval(timerId)}, Math.abs(1000*deltaMarginTop));
+            }
+
+        }
+
+
 
     document.querySelector("#left").addEventListener("click", left);
     document.querySelector("#right").addEventListener("click", right);
     document.querySelector("#down").addEventListener("click", down);
     document.querySelector("#up").addEventListener("click", up);
     document.querySelector("#block").addEventListener("click", block);
+    document.querySelector("#runX").addEventListener("click", runX);
+    document.querySelector("#runY").addEventListener("click", runY);
+
     }
 );
