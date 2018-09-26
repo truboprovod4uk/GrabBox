@@ -54,51 +54,29 @@ document.addEventListener("DOMContentLoaded",
             var cb=cbPos();
             deltaMarginLeft=cb.deltaMarginLeft();
             if (deltaMarginLeft<0){
-                var timerId=setInterval(right,1000);
-                setTimeout(function(){clearInterval(timerId)}, Math.abs(1000*deltaMarginLeft));
+                var timerId=setInterval(right,250);
+                setTimeout(function(){clearInterval(timerId)}, Math.abs(250*deltaMarginLeft));
             }else if(deltaMarginLeft>0){
-                var timerId=setInterval(left,1000);
-                setTimeout(function(){clearInterval(timerId)}, Math.abs(1000*deltaMarginLeft));
+                var timerId=setInterval(left,250);
+                setTimeout(function(){clearInterval(timerId)}, Math.abs(250*deltaMarginLeft));
             }
-
+            setTimeout(runY, Math.abs(250*deltaMarginLeft));
         }
+
         function runY(){
             var cb=cbPos();
             deltaMarginTop=cb.deltaMarginTop();
             if (deltaMarginTop<0){
-                var timerId=setInterval(down,1000);
-                setTimeout(function(){clearInterval(timerId)}, Math.abs(1000*deltaMarginTop));
+                var timerId=setInterval(down,250);
+                setTimeout(function(){clearInterval(timerId)}, Math.abs(250*deltaMarginTop));
             }else if(deltaMarginTop>0){
-                var timerId=setInterval(up,1000);
-                setTimeout(function(){clearInterval(timerId)}, Math.abs(1000*deltaMarginTop));
+                var timerId=setInterval(up,250);
+                setTimeout(function(){clearInterval(timerId)}, Math.abs(250*deltaMarginTop));
             }
 
         }
 
 
-        /*function runX(){
-            var cb=cbPos();
-            deltaMarginLeft=cb.deltaMarginLeft();
-            if (deltaMarginLeft<0){
-                var timerId=setInterval(right,1000);
-                console.log(deltaMarginLeft);
-                setTimeout(function(){clearInterval(timerId)}, Math.abs(1000*deltaMarginLeft));
-            }else if(deltaMarginLeft>0){
-                var timerId=setInterval(left,1000);
-                setTimeout(function(){clearInterval(timerId)}, Math.abs(1000*deltaMarginLeft));
-            }
-            var cb=cbPos()
-            deltaMarginLeft=cb.deltaMarginLeft();
-            console.log(deltaMarginLeft);
-            deltaMarginTop=cb.deltaMarginTop();
-            if (deltaMarginTop<0&&deltaMarginLeft==0){
-                var timerId=setInterval(down,1000);
-                setTimeout(function(){clearInterval(timerId)}, Math.abs(1000*deltaMarginTop));
-            }else if(deltaMarginTop>0){
-                var timerId=setInterval(up,1000);
-                setTimeout(function(){clearInterval(timerId)}, Math.abs(1000*deltaMarginTop));
-            }
-        }*/
 
 
 
