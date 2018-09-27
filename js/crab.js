@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded",
     function(event){
 
         var delta = 50;
+        var speed = 750;
         var h=Number((getComputedStyle(document.getElementById("playground")).height).replace("px",""));
         var w=Number((getComputedStyle(document.getElementById("playground")).width).replace("px",""));
 
@@ -12,12 +13,12 @@ document.addEventListener("DOMContentLoaded",
             crabBoxPos.marginLeftOfBox=Number((getComputedStyle(document.getElementById("box")).marginLeft).replace("px",""));
             crabBoxPos.marginTopOfBox=Number((getComputedStyle(document.getElementById("box")).marginTop).replace("px",""));
             crabBoxPos.deltaMarginLeft=function(){
-               return (crabBoxPos.marginLeftOfCrab-crabBoxPos.marginLeftOfBox-12.5)/50
-               console.log((crabBoxPos.marginLeftOfCrab-crabBoxPos.marginLeftOfBox-12.5)/50);
+               return (crabBoxPos.marginLeftOfCrab-crabBoxPos.marginLeftOfBox-12.5)/delta
+               console.log((crabBoxPos.marginLeftOfCrab-crabBoxPos.marginLeftOfBox-12.5)/delta);
             }
             crabBoxPos.deltaMarginTop=function(){
-               return (crabBoxPos.marginTopOfCrab-crabBoxPos.marginTopOfBox-12.5)/50
-               console.log((crabBoxPos.marginTopOfCrab-crabBoxPos.marginTopOfBox-12.5)/50);
+               return (crabBoxPos.marginTopOfCrab-crabBoxPos.marginTopOfBox-12.5)/delta
+               console.log((crabBoxPos.marginTopOfCrab-crabBoxPos.marginTopOfBox-12.5)/delta);
             }
             return crabBoxPos;
         }
@@ -54,29 +55,32 @@ document.addEventListener("DOMContentLoaded",
             var cb=cbPos();
             deltaMarginLeft=cb.deltaMarginLeft();
             if (deltaMarginLeft<0){
-                var timerId=setInterval(right,250);
-                setTimeout(function(){clearInterval(timerId)}, Math.abs(250*deltaMarginLeft));
+                var timerId=setInterval(right,speed);
+                setTimeout(function(){clearInterval(timerId)}, Math.abs(speed*deltaMarginLeft));
             }else if(deltaMarginLeft>0){
-                var timerId=setInterval(left,250);
-                setTimeout(function(){clearInterval(timerId)}, Math.abs(250*deltaMarginLeft));
+                var timerId=setInterval(left,speed);
+                setTimeout(function(){clearInterval(timerId)}, Math.abs(speed*deltaMarginLeft));
             }
-            setTimeout(runY, Math.abs(250*deltaMarginLeft));
+            setTimeout(runY, Math.abs(speed*deltaMarginLeft));
         }
 
         function runY(){
             var cb=cbPos();
             deltaMarginTop=cb.deltaMarginTop();
             if (deltaMarginTop<0){
-                var timerId=setInterval(down,250);
-                setTimeout(function(){clearInterval(timerId)}, Math.abs(250*deltaMarginTop));
+                var timerId=setInterval(down,speed);
+                setTimeout(function(){clearInterval(timerId)}, Math.abs(speed*deltaMarginTop));
             }else if(deltaMarginTop>0){
-                var timerId=setInterval(up,250);
-                setTimeout(function(){clearInterval(timerId)}, Math.abs(250*deltaMarginTop));
+                var timerId=setInterval(up,speed);
+                setTimeout(function(){clearInterval(timerId)}, Math.abs(speed*deltaMarginTop));
             }
 
         }
 
-
+        function randomBoxPos(){
+            document.getElementById("box").style.marginLeft=(Math.floor(Math.random() * w/delta)*delta)+"px";
+            document.getElementById("box").style.marginTop=(Math.floor(Math.random() * h/delta)*delta)+"px";
+        }
 
 
 
@@ -87,7 +91,7 @@ document.addEventListener("DOMContentLoaded",
     document.querySelector("#up").addEventListener("click", up);
     document.querySelector("#block").addEventListener("click", block);
     document.querySelector("#runX").addEventListener("click", runX);
-    document.querySelector("#runY").addEventListener("click", runY);
+    document.querySelector("#random").addEventListener("click", randomBoxPos);
 
     }
 );
